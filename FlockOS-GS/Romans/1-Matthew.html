@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FlockOS — 1-Matthew: APP API (Public Content)</title>
+<style>
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e0e0e0; --muted: #888; --accent: #6ea8fe; --gold: #d4a843; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero { text-align: center; padding: 60px 24px 40px; border-bottom: 1px solid var(--border); }
+  .hero h1 { font-size: 2.2rem; color: var(--gold); margin-bottom: 8px; }
+  .hero .subtitle { color: var(--muted); max-width: 600px; margin: 0 auto; }
+  .hero .verse { font-style: italic; color: var(--accent); margin-top: 12px; font-size: 0.95rem; }
+  .container { max-width: 820px; margin: 0 auto; padding: 40px 24px; }
+  h2 { color: var(--gold); font-size: 1.5rem; margin: 32px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { color: var(--accent); font-size: 1.1rem; margin: 20px 0 8px; }
+  p, li { margin-bottom: 10px; }
+  ul { margin: 0 0 16px 24px; }
+  .highlight { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 16px 0; }
+  code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: var(--accent); }
+  .tag { display: inline-block; background: var(--border); color: var(--text); padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; margin: 2px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  th { color: var(--gold); font-weight: 600; }
+  td code { font-size: 0.85em; }
+  footer { text-align: center; padding: 32px 24px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>&#128218; 1-Matthew — APP API</h1>
+  <div class="subtitle">Public Content Backend — Devotionals, Bible Encyclopedia, Quizzes, Theology &amp; More</div>
+  <div class="verse">"Go therefore and make disciples of all nations." — Matthew 28:19</div>
+</div>
+
+<div class="container">
+
+  <h2>Purpose</h2>
+  <p>The Matthew API serves <strong>public-facing, read-only content</strong> to the congregation. It powers the member app's devotional system, Bible reference tools, reading plans, theology articles, and quiz engine. No authentication is required — this is the church's open resource library.</p>
+
+  <h2>Files in This Folder</h2>
+  <table>
+    <tr><th>File</th><th>Purpose</th></tr>
+    <tr><td><code>Matthew.gs</code></td><td>Entry point — <code>doGet()</code> handles health checks and tab-reading requests. Routes incoming API calls to the appropriate data tab.</td></tr>
+    <tr><td><code>Truth.gs</code></td><td>Setup script — <code>setupAppApi()</code> creates all 12 content tabs with headers, validation rules, and seed data (66 books of the Bible, quiz categories, etc.).</td></tr>
+  </table>
+
+  <h2>Database: 12 Tabs</h2>
+  <div class="highlight">
+    <p>The Matthew Google Sheet contains these tabs, all created automatically by <code>setupAppApi()</code>:</p>
+  </div>
+  <table>
+    <tr><th>Tab</th><th>Columns</th><th>Content</th></tr>
+    <tr><td>Books</td><td>7</td><td>66 books of the Bible — name, testament, genre, summary, core theology, practical application</td></tr>
+    <tr><td>Devotionals</td><td>9</td><td>Daily devotions — title, scripture, reflection, prayer, author, date</td></tr>
+    <tr><td>ReadingPlans</td><td>7</td><td>Structured reading plans (e.g., Bible in a year)</td></tr>
+    <tr><td>ReadingPlanDays</td><td>6</td><td>Day-by-day breakdown for each plan</td></tr>
+    <tr><td>Lexicon</td><td>8</td><td>Hebrew/Greek word studies</td></tr>
+    <tr><td>Genealogy</td><td>7</td><td>Biblical genealogy records</td></tr>
+    <tr><td>Theology</td><td>8</td><td>Doctrinal articles and systematic theology</td></tr>
+    <tr><td>Apologetics</td><td>7</td><td>Faith defense resources and evidence</td></tr>
+    <tr><td>QuizCategories</td><td>4</td><td>Quiz topic groupings</td></tr>
+    <tr><td>QuizQuestions</td><td>9</td><td>Bible knowledge questions with answers, references, and categories</td></tr>
+    <tr><td>Counseling</td><td>8</td><td>Biblical counseling topics and resources</td></tr>
+    <tr><td>HeartCheck</td><td>7</td><td>Spiritual self-assessment prompts</td></tr>
+  </table>
+
+  <h2>How the API Works</h2>
+  <p>The Matthew API is a simple <strong>tab reader</strong>. When the frontend calls <code>TheVine.app.books()</code>, it sends a GET request with the tab name. Matthew.gs reads the corresponding sheet tab and returns the rows as JSON. There is no write access — Matthew is strictly read-only.</p>
+
+  <h3>API Pattern</h3>
+  <div class="highlight">
+    <p><code>GET ?tab=Books</code> → Returns all rows from the Books tab as an array of objects<br>
+    <code>GET ?tab=QuizQuestions</code> → Returns all quiz questions<br>
+    <code>GET ?tab=Devotionals&amp;date=2026-03-21</code> → Returns today's devotional</p>
+  </div>
+
+  <h2>Implementation for Your Church</h2>
+  <ol>
+    <li><strong>Create a Google Sheet</strong> — this will be your Matthew database</li>
+    <li><strong>Open Apps Script</strong> — Extensions → Apps Script in the Sheet</li>
+    <li><strong>Copy Matthew.gs and Truth.gs</strong> into the script editor</li>
+    <li><strong>Run <code>setupAppApi()</code></strong> — this creates all 12 tabs with proper headers</li>
+    <li><strong>Populate content</strong> — add your devotionals, theology articles, and quiz questions</li>
+    <li><strong>Deploy as Web App</strong> — set access to "Anyone" (no authentication needed)</li>
+    <li><strong>Note the URL</strong> — this is your APP API endpoint for frontend configuration</li>
+  </ol>
+
+  <h2>Content Tips</h2>
+  <ul>
+    <li>The <strong>Books</strong> tab comes pre-seeded with all 66 books — edit summaries to match your church's teaching style</li>
+    <li><strong>Devotionals</strong> can be written by multiple authors — use the Author column</li>
+    <li><strong>Quiz questions</strong> support multiple choice (4 options) with scriptural references</li>
+    <li><strong>Reading plans</strong> are modular — create as many plans as you want, each with its own day-by-day breakdown</li>
+  </ul>
+
+</div>
+
+<footer>
+  FlockOS &middot; 1-Matthew &middot; APP API &mdash; "The harvest is plentiful." — Matthew 9:37
+</footer>
+
+</body>
+</html>

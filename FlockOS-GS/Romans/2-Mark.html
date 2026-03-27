@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FlockOS — 2-Mark: MISSIONS API</title>
+<style>
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e0e0e0; --muted: #888; --accent: #6ea8fe; --gold: #d4a843; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero { text-align: center; padding: 60px 24px 40px; border-bottom: 1px solid var(--border); }
+  .hero h1 { font-size: 2.2rem; color: var(--gold); margin-bottom: 8px; }
+  .hero .subtitle { color: var(--muted); max-width: 600px; margin: 0 auto; }
+  .hero .verse { font-style: italic; color: var(--accent); margin-top: 12px; font-size: 0.95rem; }
+  .container { max-width: 820px; margin: 0 auto; padding: 40px 24px; }
+  h2 { color: var(--gold); font-size: 1.5rem; margin: 32px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { color: var(--accent); font-size: 1.1rem; margin: 20px 0 8px; }
+  p, li { margin-bottom: 10px; }
+  ul, ol { margin: 0 0 16px 24px; }
+  .highlight { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 16px 0; }
+  code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  th { color: var(--gold); font-weight: 600; }
+  footer { text-align: center; padding: 32px 24px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>&#127758; 2-Mark — MISSIONS API</h1>
+  <div class="subtitle">Global Outreach Backend — Persecution Tracking, Country Dossiers, Mission Teams &amp; Field Reports</div>
+  <div class="verse">"Go into all the world and proclaim the gospel to the whole creation." — Mark 16:15</div>
+</div>
+
+<div class="container">
+
+  <h2>Purpose</h2>
+  <p>The Mark API powers FlockOS's <strong>global missions module</strong>. It tracks persecution data by country, manages mission teams and their field assignments, stores country-level intelligence dossiers, and logs field reports. This is the church's window into the persecuted church worldwide and its own outreach efforts abroad.</p>
+
+  <h2>Files in This Folder</h2>
+  <table>
+    <tr><th>File</th><th>Purpose</th></tr>
+    <tr><td><code>Mark.gs</code></td><td>Entry point — <code>doGet()</code> handles health checks and routes API requests to the correct data tabs.</td></tr>
+    <tr><td><code>Gospel.gs</code></td><td>Setup script — <code>setupMissionsApi()</code> creates all 56 tabs with headers, validation, and reference data.</td></tr>
+  </table>
+
+  <h2>Database: 56 Tabs</h2>
+  <p>The Mark Google Sheet contains 56 tabs organized into these categories:</p>
+
+  <h3>Persecution Tracking</h3>
+  <ul>
+    <li><strong>PersecutionCountries</strong> — Country-level persecution severity ratings and watch lists</li>
+    <li><strong>PersecutionIncidents</strong> — Specific reported incidents with dates, descriptions, and sources</li>
+    <li><strong>PersecutionSources</strong> — Reference organizations (Open Doors, ICC, VOM, etc.)</li>
+  </ul>
+
+  <h3>Country Intelligence</h3>
+  <ul>
+    <li><strong>CountryDossiers</strong> — Detailed profiles for each country where the church has interests</li>
+    <li><strong>CountryContacts</strong> — In-country contacts and partner organizations</li>
+    <li><strong>CountryResources</strong> — Available resources and logistics per region</li>
+  </ul>
+
+  <h3>Mission Teams</h3>
+  <ul>
+    <li><strong>MissionTeams</strong> — Team definitions, leaders, target regions</li>
+    <li><strong>MissionMembers</strong> — Team member assignments and roles</li>
+    <li><strong>MissionTrips</strong> — Planned and completed trips with dates and destinations</li>
+    <li><strong>FieldReports</strong> — On-the-ground reports from mission teams</li>
+  </ul>
+
+  <h3>Support &amp; Logistics</h3>
+  <ul>
+    <li><strong>MissionFunding</strong> — Financial support tracking per team and trip</li>
+    <li><strong>PrayerNeeds</strong> — Mission-specific prayer requests</li>
+    <li><strong>PartnerOrganizations</strong> — Collaborating ministries and NGOs</li>
+  </ul>
+
+  <h2>Implementation for Your Church</h2>
+  <ol>
+    <li><strong>Create a Google Sheet</strong> — this will be your Mark database</li>
+    <li><strong>Open Apps Script</strong> — Extensions → Apps Script</li>
+    <li><strong>Copy Mark.gs and Gospel.gs</strong> into the script editor</li>
+    <li><strong>Run <code>setupMissionsApi()</code></strong> — creates all 56 tabs automatically</li>
+    <li><strong>Populate data</strong> — start with countries your church supports, then add teams and contacts</li>
+    <li><strong>Deploy as Web App</strong> — set access level appropriate for your security needs</li>
+  </ol>
+
+  <h2>Use Cases</h2>
+  <ul>
+    <li><strong>Missions committee</strong> — track active teams, upcoming trips, and budget allocation</li>
+    <li><strong>Prayer ministry</strong> — surface mission-field prayer needs to the congregation</li>
+    <li><strong>Persecution awareness</strong> — display real-time persecution data during services or small groups</li>
+    <li><strong>Reporting</strong> — generate trip reports and share field updates with supporters</li>
+    <li><strong>Multi-church coordination</strong> — share mission data across partner churches</li>
+  </ul>
+
+</div>
+
+<footer>
+  FlockOS &middot; 2-Mark &middot; MISSIONS API &mdash; "The Lord added to their number daily." — Acts 2:47
+</footer>
+
+</body>
+</html>

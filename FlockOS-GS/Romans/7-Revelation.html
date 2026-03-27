@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FlockOS — Revelation: Documentation, Config &amp; Deployment</title>
+<style>
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e0e0e0; --muted: #888; --accent: #6ea8fe; --gold: #d4a843; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero { text-align: center; padding: 60px 24px 40px; border-bottom: 1px solid var(--border); }
+  .hero h1 { font-size: 2.2rem; color: var(--gold); margin-bottom: 8px; }
+  .hero .subtitle { color: var(--muted); max-width: 600px; margin: 0 auto; }
+  .hero .verse { font-style: italic; color: var(--accent); margin-top: 12px; font-size: 0.95rem; }
+  .container { max-width: 820px; margin: 0 auto; padding: 40px 24px; }
+  h2 { color: var(--gold); font-size: 1.5rem; margin: 32px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { color: var(--accent); font-size: 1.1rem; margin: 20px 0 8px; }
+  p, li { margin-bottom: 10px; }
+  ul, ol { margin: 0 0 16px 24px; }
+  .highlight { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 16px 0; }
+  code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  th { color: var(--gold); font-weight: 600; }
+  footer { text-align: center; padding: 32px 24px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>&#128220; Revelation — Documentation &amp; Deployment</h1>
+  <div class="subtitle">The Complete Reference — HTML Applications, Configuration Guides, Deployment Artifacts &amp; System Documentation</div>
+  <div class="verse">"Write therefore the things that you have seen, those that are and those that are to take place after this." — Revelation 1:19</div>
+</div>
+
+<div class="container">
+
+  <h2>Purpose</h2>
+  <p>Revelation is the project's <strong>documentation and deployment layer</strong>. It contains the finished HTML applications that users interact with, configuration references, deployment guides, system planning documents, and the wiring audit that maps every frontend-to-backend connection.</p>
+
+  <h2>Files in This Folder</h2>
+  <table>
+    <tr><th>File</th><th>Purpose</th></tr>
+    <tr><td><code>the_good_shepherd.html</code></td><td><strong>Admin Console</strong> — The full CRM application for church staff and volunteers. Contains the navigation, dashboard, 40+ module views, notification system, and role-gated access.</td></tr>
+    <tr><td><code>the_wall.html</code></td><td><strong>Public Prayer Request</strong> — Community-facing prayer request display and submission.</td></tr>
+    <tr><td><code>A-Deployment.html</code></td><td><strong>Deployment Interface</strong> — Guided setup for deploying FlockOS to a new church instance.</td></tr>
+    <tr><td><code>admin.html</code></td><td><strong>System Admin</strong> — Low-level admin interface for database operations and diagnostics.</td></tr>
+  </table>
+
+  <h3>Documentation Files</h3>
+  <table>
+    <tr><th>File</th><th>Content</th></tr>
+    <tr><td><code>2_Config.txt</code></td><td>Complete configuration reference — all AppConfig keys, module settings, and system parameters.</td></tr>
+    <tr><td><code>3_Deployment.txt</code></td><td>Step-by-step deployment guide — from creating Sheets to going live.</td></tr>
+    <tr><td><code>4_Planning.txt</code></td><td>Architecture planning notes and historical decision log.</td></tr>
+    <tr><td><code>5_References.txt</code></td><td>Complete API reference — every action, its parameters, roles, and response format.</td></tr>
+    <tr><td><code>7_Vine.txt</code></td><td>TheVine API client documentation — endpoint mapping and caching strategy.</td></tr>
+    <tr><td><code>8_Wiring.txt</code></td><td>Frontend-to-backend wiring audit — parameter contracts, known issues, and naming conventions.</td></tr>
+    <tr><td><code>1_Code Citations.md</code></td><td>Attribution and code citation notes.</td></tr>
+  </table>
+
+  <h2>The HTML Applications</h2>
+
+  <h3>The Good Shepherd (Admin Console)</h3>
+  <p>This is the main application church staff use daily. It includes:</p>
+  <ul>
+    <li><strong>Role-gated sidebar navigation</strong> — modules appear based on the user's role level</li>
+    <li><strong>Dashboard with quick-access cards</strong> — common tasks presented as clickable cards</li>
+    <li><strong>Notification system</strong> — bell icon with real-time notifications, click-to-navigate</li>
+    <li><strong>Module toggle system</strong> — administrators can enable/disable modules per church needs</li>
+    <li><strong>Favorites bar</strong> — users can pin their most-used modules</li>
+    <li><strong>Theme selector</strong> — 8 visual themes to match church branding</li>
+  </ul>
+
+  <h3>The Public App (index.html in root)</h3>
+  <p>The congregation-facing app lives in the project root. It provides devotionals, reading plans, Bible quiz, prayer requests, event registration, giving, and community features — all without requiring admin access.</p>
+
+  <h2>Deployment Process Overview</h2>
+  <ol>
+    <li>Create 4 Google Sheets (Matthew, Mark, Luke, John)</li>
+    <li>Create 4 Apps Script projects (one per Sheet)</li>
+    <li>Copy .gs files into the correct projects</li>
+    <li>Run setup functions to create all 200 tabs</li>
+    <li>Deploy each as a Web App</li>
+    <li>Configure API endpoints in the frontend HTML files</li>
+    <li>Set up the first admin account</li>
+    <li>Deploy the HTML applications (host or serve via Apps Script)</li>
+  </ol>
+  <p>Full details are in <code>3_Deployment.txt</code>.</p>
+
+  <h2>The Wiring Audit</h2>
+  <p>The <code>8_Wiring.txt</code> file in this folder documents every frontend-to-backend connection in the system. It maps which parameters the frontend sends, which parameters the backend expects, and flags any mismatches. This is the single source of truth for maintaining the system's integrity during development and expansion.</p>
+
+</div>
+
+<footer>
+  FlockOS &middot; Revelation &middot; Documentation &amp; Deployment &mdash; "Behold, I am making all things new." — Revelation 21:5
+</footer>
+
+</body>
+</html>

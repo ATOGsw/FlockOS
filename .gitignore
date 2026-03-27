@@ -1,0 +1,51 @@
+# ══════════════════════════════════════════════════════════════════════════
+# FlockOS .gitignore
+# ══════════════════════════════════════════════════════════════════════════
+
+# ── OS / Editor artifacts ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# ── Backup / temp files ──────────────────────────────────────────────────
+*.bak
+*.tmp
+*.log
+
+# ── Google Apps Script backend files ─────────────────────────────────────
+# .gs files are deployed via the Apps Script editor, not git.
+*.gs
+
+# ── Documentation text files ─────────────────────────────────────────────
+# Internal docs with sensitive references; not for public repos.
+*.txt
+
+# ── Internal reference docs ───────────────────────────────────────────────
+# Large citation/reference markdown — useful locally, not for the repo.
+\#\ Code\ Citations.md
+\#\ Code\ References.md
+
+# ── Database / schema files ────────────────────────────────────────────────
+# Keep locally for future Cloud SQL work; do not publish.
+FlockOS-GS/Database/
+
+# ── Node / build artifacts (future-proofing) ─────────────────────────────
+node_modules/
+dist/
+.env
+.env.*
+
+# ── Python build tools ───────────────────────────────────────────────────
+.venv/
+__pycache__/
+*.pyc
+
+# ── Source JS & build pipeline (development only, not deployed) ──────────
+# Genesis holds readable source .js files; Exodus holds build scripts.
+# Only Acts/ (minified output) is committed for production delivery.
+FlockOS-GS/Genesis/
+FlockOS-GS/Exodus/

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FlockOS — 4-John: FLOCK API (CRM Core)</title>
+<style>
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e0e0e0; --muted: #888; --accent: #6ea8fe; --gold: #d4a843; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero { text-align: center; padding: 60px 24px 40px; border-bottom: 1px solid var(--border); }
+  .hero h1 { font-size: 2.2rem; color: var(--gold); margin-bottom: 8px; }
+  .hero .subtitle { color: var(--muted); max-width: 600px; margin: 0 auto; }
+  .hero .verse { font-style: italic; color: var(--accent); margin-top: 12px; font-size: 0.95rem; }
+  .container { max-width: 820px; margin: 0 auto; padding: 40px 24px; }
+  h2 { color: var(--gold); font-size: 1.5rem; margin: 32px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { color: var(--accent); font-size: 1.1rem; margin: 20px 0 8px; }
+  p, li { margin-bottom: 10px; }
+  ul, ol { margin: 0 0 16px 24px; }
+  .highlight { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 16px 0; }
+  code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: var(--accent); }
+  .tag { display: inline-block; background: var(--border); color: var(--text); padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; margin: 2px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  th { color: var(--gold); font-weight: 600; }
+  .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+  .file-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .file-card strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 0.9rem; }
+  .file-card span { color: var(--muted); font-size: 0.82rem; }
+  footer { text-align: center; padding: 32px 24px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>&#128101; 4-John — FLOCK API</h1>
+  <div class="subtitle">The CRM Core — 24 Backend Files, 79 Tabs, Authentication, and Every Operational Module</div>
+  <div class="verse">"I am the good shepherd. The good shepherd lays down his life for the sheep." — John 10:11</div>
+</div>
+
+<div class="container">
+
+  <h2>Purpose</h2>
+  <p>John is the <strong>heart of FlockOS</strong>. It handles all authenticated operations: member management, role-based access control, pastoral care, worship planning, giving records, event coordination, communications, and more. Every action that requires a login routes through the John API.</p>
+  <p>With 24 Google Apps Script files and 79 spreadsheet tabs, John is by far the largest and most complex component of the system.</p>
+
+  <h2>Files in This Folder (24 Files)</h2>
+
+  <h3>Core Infrastructure</h3>
+  <div class="file-grid">
+    <div class="file-card"><strong>John.gs</strong><span>Entry point — doGet/doPost, core utilities, getTab()</span></div>
+    <div class="file-card"><strong>Api.gs</strong><span>Action router — maps 100+ API actions to handler functions</span></div>
+    <div class="file-card"><strong>Auth.gs</strong><span>Authentication — login, sessions, tokens, role checks</span></div>
+    <div class="file-card"><strong>Hash.gs</strong><span>SHA-256 salt+pepper — password hashing</span></div>
+    <div class="file-card"><strong>Database.gs</strong><span>Sheet read/write helpers, prayer &amp; journal handlers</span></div>
+    <div class="file-card"><strong>Utilities.gs</strong><span>Shared utilities — findRowById(), generateId(), date helpers</span></div>
+    <div class="file-card"><strong>Setup.gs</strong><span>setupExpansion() — creates all 79 tabs with headers &amp; config</span></div>
+    <div class="file-card"><strong>Expansions.gs</strong><span>Multi-church tenant architecture</span></div>
+  </div>
+
+  <h3>Module Files</h3>
+  <div class="file-grid">
+    <div class="file-card"><strong>Cards.gs</strong><span>Member directory — profiles, search, family links</span></div>
+    <div class="file-card"><strong>Care.gs</strong><span>Pastoral care — cases, interactions, assignments</span></div>
+    <div class="file-card"><strong>Compassion.gs</strong><span>Benevolence — assistance requests, resources</span></div>
+    <div class="file-card"><strong>Communications.gs</strong><span>Messages, broadcasts, notifications, templates</span></div>
+    <div class="file-card"><strong>Discipleship.gs</strong><span>Growth pathways, milestones, mentoring</span></div>
+    <div class="file-card"><strong>Learning.gs</strong><span>Education — topics, playlists, progress, certificates</span></div>
+    <div class="file-card"><strong>Ministries.gs</strong><span>Ministry teams, roles, member assignments</span></div>
+    <div class="file-card"><strong>Missions.gs</strong><span>CRM-side mission coordination</span></div>
+    <div class="file-card"><strong>Outreach.gs</strong><span>Community outreach — events, contacts, campaigns</span></div>
+    <div class="file-card"><strong>Photos.gs</strong><span>Photo albums — Google Drive integration, captions</span></div>
+    <div class="file-card"><strong>Sermons.gs</strong><span>Message library — sermons, series, scheduling</span></div>
+    <div class="file-card"><strong>Services.gs</strong><span>Service planning — orders of worship, team assignments</span></div>
+    <div class="file-card"><strong>Songs.gs</strong><span>Song library — lyrics, chords, arrangements, setlists</span></div>
+    <div class="file-card"><strong>Statistics.gs</strong><span>CRM-side statistics &amp; dashboard data</span></div>
+    <div class="file-card"><strong>Theology.gs</strong><span>Doctrinal articles &amp; teaching resources</span></div>
+    <div class="file-card"><strong>Todo.gs</strong><span>Task management — personal &amp; team to-do lists</span></div>
+  </div>
+
+  <h2>Authentication &amp; Roles</h2>
+  <p>Every John API request must include a valid session token. The 6-tier role system controls what each user can see and do:</p>
+  <table>
+    <tr><th>Role</th><th>Level</th><th>Access</th></tr>
+    <tr><td>readonly</td><td>0</td><td>Personal profile, prayer requests, giving</td></tr>
+    <tr><td>volunteer</td><td>1</td><td>Directory, events, attendance, basic modules</td></tr>
+    <tr><td>care</td><td>2</td><td>Pastoral care cases, assigned member shepherding</td></tr>
+    <tr><td>leader</td><td>3</td><td>Care assignments, statistics, management</td></tr>
+    <tr><td>pastor</td><td>4</td><td>All confidential cases, full override</td></tr>
+    <tr><td>admin</td><td>5</td><td>System configuration, user management, audit</td></tr>
+  </table>
+
+  <h2>API Pattern</h2>
+  <div class="highlight">
+    <p>All requests go through <code>doPost()</code> with a JSON body:</p>
+    <p><code>{ "action": "care.update", "token": "abc123", ... params }</code></p>
+    <p>Api.gs routes the action string to the correct handler function, which validates the role, processes the data, writes to the Sheet, logs the audit trail, and returns JSON.</p>
+  </div>
+
+  <h3>Key Convention: ID-Based Lookups</h3>
+  <div class="highlight">
+    <p>All update/delete operations identify records by <code>params.id</code> (a UUID in column A). The backend uses <code>findRowById()</code> from Utilities.gs to locate the row. This is critical — never use row numbers directly, as they shift when rows are added or deleted.</p>
+  </div>
+
+  <h2>Implementation for Your Church</h2>
+  <ol>
+    <li><strong>Create a Google Sheet</strong> — this is your main CRM database (the largest one)</li>
+    <li><strong>Open Apps Script</strong> — Extensions → Apps Script</li>
+    <li><strong>Copy all 24 .gs files</strong> into the script editor</li>
+    <li><strong>Run <code>setupExpansion()</code></strong> — creates all 79 tabs with headers, validation, and default config</li>
+    <li><strong>Configure Script Properties</strong> — set <code>SHEET_ID</code>, <code>SALT</code>, and <code>PEPPER</code> values</li>
+    <li><strong>Create your admin account</strong> — add the first user row directly in the Members tab</li>
+    <li><strong>Deploy as Web App</strong> — set to "Anyone" (the code handles its own authentication)</li>
+    <li><strong>Test the login flow</strong> — verify authentication works before inviting others</li>
+  </ol>
+
+  <h2>Security Notes</h2>
+  <ul>
+    <li>Passwords are hashed with SHA-256 + salt + pepper — never stored in plain text</li>
+    <li>Session tokens expire after a configurable period</li>
+    <li>Every data modification is logged in the Audit tab with user email, timestamp, and action</li>
+    <li>Confidential pastoral care cases are gated to pastor+ roles at the handler level</li>
+    <li>The <code>requireRole()</code> function guards every handler — no role check, no access</li>
+  </ul>
+
+</div>
+
+<footer>
+  FlockOS &middot; 4-John &middot; FLOCK API &mdash; "By this all people will know that you are my disciples, if you have love for one another." — John 13:35
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "name": "FlockOS",
+  "short_name": "FlockOS",
+  "description": "Church Management & Ministry Platform",
+  "start_url": "FlockOS-GS/Revelation/the_good_shepherd.min.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#e8a838",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "FlockOS-GS/Revelation/FlockOS_White.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "FlockOS-GS/Revelation/FlockOS_Blue.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "url": "FlockOS-GS/Revelation/the_good_shepherd.min.html#dashboard",
+      "icons": [{ "src": "FlockOS-GS/Revelation/FlockOS_White.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Messages",
+      "url": "FlockOS-GS/Revelation/the_good_shepherd.min.html#comms",
+      "icons": [{ "src": "FlockOS-GS/Revelation/FlockOS_White.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Directory",
+      "url": "FlockOS-GS/Revelation/the_good_shepherd.min.html#directory",
+      "icons": [{ "src": "FlockOS-GS/Revelation/FlockOS_White.png", "sizes": "192x192" }]
+    }
+  ]
+}
